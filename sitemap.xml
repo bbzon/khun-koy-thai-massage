@@ -1,25 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-    <!-- หน้าแรก -->
-    <url>
-        <loc>https://khun-koy-massage.netlify.app/</loc>
-        <priority>1.0</priority>
-        <changefreq>weekly</changefreq>
-    </url>
+  <url>
+    <loc>https://bbzon.github.io/khun-koy-thai-massage/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
 
-    <!-- หน้า Impressum -->
-    <url>
-        <loc>https://khun-koy-massage.netlify.app/impressum.html</loc>
-        <priority>0.8</priority>
-        <changefreq>yearly</changefreq>
-    </url>
+  <url>
+    <loc>https://bbzon.github.io/khun-koy-thai-massage/#intro</loc>
+    <priority>0.9</priority>
+  </url>
 
-    <!-- หน้า Datenschutz -->
-    <url>
-        <loc>https://khun-koy-massage.netlify.app/datenschutz.html</loc>
-        <priority>0.8</priority>
-        <changefreq>yearly</changefreq>
-    </url>
+  <url>
+    <loc>https://bbzon.github.io/khun-koy-thai-massage/#thai-massage</loc>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://bbzon.github.io/khun-koy-thai-massage/#prices</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://bbzon.github.io/khun-koy-thai-massage/#gallery</loc>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://bbzon.github.io/khun-koy-thai-massage/#contact</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://bbzon.github.io/khun-koy-thai-massage/sitemap.xml</loc>
+  </url>
 
 </urlset>
