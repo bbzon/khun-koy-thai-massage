@@ -1,0 +1,1928 @@
+/* =============================================== */
+/* 0. GLOBAL RESET / BOX-SIZING                    */
+/* =============================================== */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* ซ่อน H1 จากตาคน แต่ให้ Google และ screen reader ยังอ่านได้ */
+.seo-main-title {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+
+
+/* =============================================== */
+/* 1. BASE STYLES – ฟอนต์พื้นฐาน + โครงหน้าเว็บ   */
+/* =============================================== */
+
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background-color: #6b1d1b;  /* แดงเข้มทั้งหน้า */
+    color: #fdf7f2;
+    min-height: 100vh;
+    overflow-x: hidden; /* กันไม่ให้เว็บเลื่อนขวาซ้ายบนมือถือ */
+}
+
+.container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+
+
+/* =============================================== */
+/* 2. TOPBAR + NAV + LANGUAGE SWITCH – แถบเมนูบนสุด */
+/* =============================================== */
+
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(43, 15, 13, 0.95);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid rgba(255, 215, 160, 0.25);
+}
+
+.topbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.4rem 0;
+}
+
+/* โลโก้ตัวหนังสือซ้ายบน "Khun Koy Thai Massage" */
+.logo-text {
+    font-family: "Georgia", "Times New Roman", serif;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    font-size: 1.05rem;
+    text-transform: uppercase;
+    color: #f9d37a;
+}
+
+/* เมนูนำทาง หน้าแรก / บริการ / ราคา / ติดต่อ */
+.nav {
+    display: flex;
+    gap: 1rem;
+}
+
+.nav-link {
+    font-family: "Georgia", "Times New Roman", serif;
+    font-size: 1rem;
+    text-decoration: none;
+    color: #fdf7f2;
+    opacity: 0.9;
+    letter-spacing: 0.04em;
+}
+
+.nav-link:hover {
+    opacity: 1;
+    border-bottom: 1px solid #f9d37a;
+}
+
+/* ปุ่มเปลี่ยนภาษา TH / DE / EN */
+.lang-switch button {
+    background: transparent;
+    border: 2px solid #f9d37a;
+    color: #f9d37a;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-left: 0.5rem;
+    padding: 0.25rem 0.7rem;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+
+.lang-switch button:hover {
+    background: #f9d37a;
+    color: #3b1411;
+    transform: translateY(-1px);
+}
+
+.lang-switch .active-lang {
+    background: #f9d37a;
+    color: #3b1411;
+    font-weight: 700;
+    border-color: #f9d37a;
+}
+
+/* ============ HAMBURGER BUTTON (มือถือ) ============ */
+.nav-toggle {
+    display: none;                 /* ซ่อนบนจอใหญ่ */
+    flex-direction: column;
+    gap: 5px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem 0.5rem;
+    margin-left: 0.75rem;
+}
+
+.nav-toggle span {
+    width: 26px;
+    height: 3px;
+    background: #f9d37a;
+    border-radius: 3px;
+}
+
+/* =============================================== */
+/* TOPBAR & HERO บนจอเล็ก (มือถือ)                 */
+/* =============================================== */
+@media (max-width: 720px) {
+
+    /* แสดงปุ่ม hamburger */
+    .nav-toggle {
+        display: flex;
+    }
+
+    /* ซ่อนเมนูหลักในแถบบนก่อนกด */
+    .nav {
+        position: absolute;
+        top: 100%;                   /* อยู่ใต้ .topbar */
+        right: 1.5rem;
+        background: rgba(43, 15, 13, 0.97);
+        border: 1px solid rgba(249, 211, 122, 0.3);
+        border-radius: 10px;
+        padding: 0.75rem 1rem;
+        display: none;               /* ปิดเริ่มต้น */
+        flex-direction: column;
+        gap: 0.5rem;
+        min-width: 160px;
+        z-index: 999;
+    }
+
+    /* ตอนเปิดเมนู (มีคลาส .open จาก JS) */
+    .nav.open {
+        display: flex;
+    }
+
+    .topbar-inner {
+        justify-content: space-between;
+    }
+
+    /* HERO layout บนมือถือ */
+    .hero {
+        padding-top: 3rem;
+    }
+
+    .hero-inner {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-text {
+        margin-top: 1rem;
+    }
+
+    .hero-sub {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-logo {
+        margin-top: 0;
+        flex: 0 0 auto;
+    }
+
+    .hero-logo-img {
+        max-height: 230px;
+        height: auto;
+        max-width: 260px;
+    }
+
+    .container {
+        padding: 0 1.2rem;
+    }
+}
+
+
+
+
+
+
+
+
+/* ============ HAMBURGER BUTTON (มือถือ) ============ */
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.nav-toggle span {
+    width: 26px;
+    height: 3px;
+    background: #f9d37a;
+    border-radius: 3px;
+}
+
+
+/* =============================================== */
+/* FLOATING WHATSAPP BUTTON – ปุ่มจองคิวลอยมุมขวา */
+/* =============================================== */
+
+.whatsapp-float {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+
+    width: 60px;
+    height: 60px;
+
+    background: #25D366;              /* สีพื้นปุ่ม (เขียว WhatsApp) */
+    border-radius: 50%;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.45);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-decoration: none;
+    z-index: 300;                      /* ให้ทับทุกอย่างอื่น */
+}
+
+/* รูปไอคอนด้านใน */
+.whatsapp-float img {
+    width: 32px;
+    height: 32px;
+    display: block;
+}
+
+/* เอฟเฟกต์ตอน hover บนคอม */
+.whatsapp-float:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 26px rgba(0,0,0,0.55);
+}
+
+/* มือถือจอเล็ก – ย่อปุ่มลงนิดหน่อย */
+@media (max-width: 480px) {
+    .whatsapp-float {
+        right: 14px;
+        bottom: 14px;
+        width: 52px;
+        height: 52px;
+    }
+
+    .whatsapp-float img {
+        width: 28px;
+        height: 28px;
+    }
+}
+
+
+
+
+
+
+
+
+/* ============ MOBILE NAV (ซ่อนตอนปกติ) ============ */
+@media (max-width: 720px) {
+
+    .nav-toggle {
+        display: flex;
+    }
+
+    .nav {
+        position: absolute;
+        top: 60px;
+        right: 15px;
+        background: rgba(43, 15, 13, 0.97);
+        border: 1px solid rgba(249, 211, 122, 0.3);
+        border-radius: 10px;
+        padding: 1rem;
+        display: none;           /* ซ่อนปกติ */
+        flex-direction: column;
+        gap: 0.8rem;
+        min-width: 150px;
+        z-index: 999;
+    }
+
+    .nav.show {
+        display: flex;           /* แสดงเมื่อเปิด */
+    }
+}
+
+
+
+/* =============================================== */
+/* 3. HERO SECTION + CTA – โลโก้ใหญ่ + ข้อความ + ปุ่มจอง */
+/* =============================================== */
+
+.hero {
+    padding: 4rem 0 3rem;
+    background-image:
+        linear-gradient(180deg, rgba(126, 37, 34, 0.85), rgba(91, 24, 22, 0.9)),
+        url("thai-bg.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.hero-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2rem;
+}
+
+/* โลโก้รูปภาพใน Hero (ฝั่งซ้าย) */
+.hero-logo {
+    flex: 0 0 220px;
+    display: flex;
+    justify-content: center;
+    margin-top: -130px;
+}
+
+.hero-logo-img {
+    height: 230px;
+    width: auto;
+    object-fit: contain;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+/* กล่องข้อความด้านขวาของ Hero */
+.hero-text {
+    flex: 1;
+    min-width: 260px;
+}
+
+.hero-title {
+    font-family: "Georgia", "Times New Roman", serif;
+    font-size: clamp(2rem, 3vw + 1rem, 2.7rem);
+    line-height: 1.2;
+    margin: 0 0 0.75rem;
+    color: #fff7ec;
+}
+
+.hero-sub {
+    font-size: 1rem;
+    max-width: 30rem;
+    margin-bottom: 1.5rem;
+    color: #fbe5c8;
+}
+
+/* ปุ่ม WhatsApp สำหรับจองคิว */
+.primary-btn {
+    display: inline-block;
+    padding: 0.7rem 1.6rem;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #f9d37a, #f5b45c);
+    color: #3b1411;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 0.95rem;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+    margin-right: 0.5rem;
+}
+
+.primary-btn:hover {
+    filter: brightness(1.05);
+    transform: translateY(-1px);
+}
+
+
+/* =============================================== */
+/* 4. GENERIC SECTION LAYOUT – โครงของ section ทั่วไป */
+/* =============================================== */
+
+.section {
+    padding: 3rem 0;
+}
+
+.section-alt {
+    background: #331512;
+}
+
+.section-title {
+    text-align: center;
+    font-family: "Georgia", "Times New Roman", serif;
+    font-size: 1.7rem;
+    margin-top: 0;
+    margin-bottom: 2rem;
+    color: #f9d37a;
+}
+
+
+/* =============================================== */
+/* 5. SERVICES CARDS – การ์ดบริการใน HERO           */
+/* =============================================== */
+
+.services-in-hero {
+    background: transparent;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+/* กริดการ์ดบริการ */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+/* จอใหญ่ให้เป็น 4 คอลัมน์ */
+@media (min-width: 1100px) {
+    .cards {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* กล่องการ์ดแต่ละใบ */
+.card {
+    background: rgba(24, 8, 6, 0.8);
+    border-radius: 16px;
+    padding: 1.4rem 1.3rem;
+    border: 1px solid rgba(249, 211, 122, 0.3);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+}
+
+.card-title {
+    font-size: 1.05rem;
+    margin-top: 0;
+    margin-bottom: 0.4rem;
+    color: #fce3a4;
+}
+
+.card-text {
+    font-size: 0.9rem;
+    color: #f7ebdf;
+    margin-top: 0;
+}
+
+/* การ์ดในจอเล็ก: ลด padding นิดหน่อย */
+@media (max-width: 600px) {
+    .card {
+        padding: 1.2rem 1rem;
+    }
+}
+
+
+/* =============================================== */
+/* 6. INTRO / WELCOME SECTION – ยินดีต้อนรับ        */
+/* =============================================== */
+
+.intro-section {
+    position: relative;
+    background: #5a181a;
+    padding: 4rem 0;
+    overflow: hidden;
+}
+
+/* กล่องรวมรูป + ข้อความ intro */
+.intro-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+
+    position: relative;
+    z-index: 1;
+}
+
+/* กล่องรูป intro-massage + intro-decor */
+.intro-image {
+    position: relative;   /* ให้ intro-decor วางอิงได้ */
+    z-index: 1;  
+}
+
+/* รูปหลัก intro-massage.png */
+.intro-main {
+    width: 120%;
+    max-width: 480px;
+    border-radius: 80px;
+    object-fit: cover;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+    z-index: 2;
+}
+
+/* รูปตกแต่ง intro-decor.png */
+.intro-decor {
+    position: absolute;
+
+    /* ตำแหน่งปรับได้ */
+    bottom: -20px;
+    left: 200px;
+
+    /* ขนาดปรับได้ */
+    width: 840px;
+
+    opacity: 0.048;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* หัวข้อ WELCOME 3 ภาษา */
+.intro-text h2 {
+    font-family: "Georgia", serif;
+    color: #f9d37a;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+/* สไตล์ข้อความยาว (ใช้ร่วมหลาย section) */
+.welcome-text {
+    text-align: justify;
+    text-align-last: left;
+    line-height: 1.8;
+}
+
+/* ข้อความยินดีต้อนรับเฉพาะ intro */
+.intro-text p {
+    font-size: 1.5rem;
+    color: #f8f4e8;
+    line-height: 1.6;
+    max-width: 500px;
+}
+
+
+
+/* แท็กไลน์ต้อนรับใต้หัวข้อหลัก */
+.intro-tagline {
+    font-size: 1.05rem;
+    color: #fbe1a2;
+    margin-bottom: 1rem;
+    line-height: 1.7;
+    text-align: justify;
+}
+
+/* มือถือ – ให้แคบลงหน่อย */
+@media (max-width: 780px) {
+    .intro-tagline {
+        font-size: 0.98rem;
+    }
+}
+
+/* Intro บนมือถือ: รูปอยู่บน ข้อความอยู่ล่าง */
+@media (max-width: 780px) {
+    .intro-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .intro-text p {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+
+/* =============================================== */
+/* 7. STORY SECTIONS – ส่วนเล่าเรื่องแต่ละการนวด   */
+/* =============================================== */
+
+
+/* ----------------------------------------------- */
+/* 7.0 BASE STORY LAYOUT – โครง 2 คอลัมน์ใช้ร่วมกัน */
+/* ----------------------------------------------- */
+
+/* กล่องรวม story-text + story-image */
+.story-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+}
+
+/* ถ้าเพิ่ม .reverse ที่ story-inner จะสลับซ้าย/ขวา */
+.story-inner.reverse {
+    flex-direction: row-reverse;
+}
+
+/* ฝั่งตัวหนังสือในทุก story */
+.story-text {
+    flex: 1.3;
+    min-width: 260px;
+    text-align: justify;
+    position: relative;
+    z-index: 3;
+}
+
+/* หัวข้อเรื่องในแต่ละการนวด */
+.story-title {
+    font-family: "Georgia", serif;
+    font-size: 2rem;
+    color: #f9d37a;
+    margin-bottom: 1.2rem;
+}
+
+/* เนื้อความยาวใน story (ทุกภาษา) */
+.story-text p {
+    color: #f7e7dc;
+    font-size: 1.5rem;
+    line-height: 1.7;
+}
+
+/* ฝั่งรูปในทุก story */
+.story-image {
+    flex: 1;
+    min-width: 300px;
+    text-align: center;
+
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+}
+
+/* รูปหลักทุกใบใน story */
+.story-image img {
+    width: 100%;
+    max-width: 480px;
+    border-radius: 18px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+    display: block;
+}
+
+/* ใช้กับรูปหลักทุกใบ ยกเว้นรูปตกแต่ง (.section-decor) */
+.story-image img:not(.section-decor) {
+    width: 100%;
+    max-width: 480px;
+    border-radius: 18px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+}
+
+/* class เสริม ถ้าต้องการใส่ pattern พื้นหลังให้ story ใด ๆ */
+.story-section--pattern {
+    /* ตัวอย่าง ถ้าจะใส่แพทเทิร์น:
+       background-image: url("pattern.png");
+       background-size: cover;
+    */
+}
+
+
+/* =============================================== */
+/* 7.1 THAI MASSAGE STORY (การนวดแผนไทย)          */
+/* =============================================== */
+
+/* พื้นหลังและระยะบน–ล่างของ section การนวดแผนไทย */
+.thai-massage-story {
+    background: #4d1815;
+    padding: 4rem 0;
+}
+
+/* รูปหลักโค้งมนพิเศษ thai-massage-02.png */
+.intro-2 {
+    width: 120%;
+    max-width: 480px;
+    border-radius: 80px;
+    object-fit: cover;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+    position: relative;
+    z-index: 2;
+}
+
+/* รูปตกแต่ง “ช้าง” ด้านหลัง */
+.section-decor {
+    position: absolute;
+    bottom: 10px;
+    
+    inset-inline: 0;    /* = left: 0; right: 0; */
+    margin-inline: auto; /* = center แบบ block */
+    
+    width: 320px !important;     /* ปรับขนาดช้างตรงนี้ */
+    max-width: none !important;  /* กันไม่ให้ max-width ที่อื่นมาบังคับ */
+
+    opacity: 0.048;
+    z-index: -1;
+    pointer-events: none;
+}
+
+
+/* ตัดเงารูปในการนวดไทยให้เนียนกับพื้นหลัง */
+.thai-massage-story .story-image img,
+.thai-massage-story .intro-2 {
+    box-shadow: none;
+    /* ถ้าอยากมีเงานิดหน่อย:
+       box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+    */
+}
+
+
+/* =============================================== */
+/* 7.2 AROMA OIL MASSAGE STORY (นวดน้ำมันอโรม่า) */
+/* =============================================== */
+
+/* พื้นหลังและระยะสำหรับนวดอโรม่า */
+.aroma-story {
+    background: #5a181a;   /* น้ำตาลแดงอีกเฉด */
+    padding: 4rem 0;
+}
+
+/* layout ด้านในใช้ .story-inner, .story-text, .story-image เหมือนกัน */
+/* ========================================================= */
+/* AROMA STORY – รูปหลัก                                     */
+/* ========================================================= */
+.intro-3 {
+    width: 120%;
+    max-width: 480px;
+    border-radius: 80px;
+    object-fit: cover;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+    position: relative;
+    z-index: 2;
+}
+
+/* ========================================================= */
+/* AROMA STORY – รูปตกแต่งเฉพาะส่วนนี้                       */
+/* ========================================================= */
+.section-decor-aroma {
+    position: absolute;
+    bottom: -10px;
+    
+    inset-inline: 0;    /* = left: 0; right: 0; */
+    margin-inline: auto; /* = center แบบ block */
+
+    width: 400px !important;      /* ปรับความกว้างช้างที่นี่ */
+    max-width: none !important;   /* ยกเลิก max-width 480 ของกฎรวม */
+
+    opacity: 0.048;
+    pointer-events: none;
+    z-index: -1;
+}
+
+
+/* =============================================== */
+/* 7.3 HOT STONE MASSAGE STORY (นวดหินร้อน)       */
+/* =============================================== */
+
+.hotstone-story {
+    background: #4d1815;
+    padding: 4rem 0;
+}
+
+/* ========================================================= */
+/* hot STORY – รูปหลัก                                      */
+/* ========================================================= */
+.intro-4 {
+    width: 120%;
+    max-width: 480px;
+    border-radius: 80px;
+    object-fit: cover;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+    position: relative;
+    z-index: 2;
+}
+
+/* ========================================================= */
+/* hot Y – รูปตกแต่งเฉพาะส่วนนี้                            */
+/* ========================================================= */
+.section-decor-Hot {
+    position: absolute;
+    bottom: -10px;
+    
+    inset-inline: 0;    /* = left: 0; right: 0; */
+    margin-inline: auto; /* = center แบบ block */
+
+    width: 400px !important;      /* ปรับความกว้างช้างที่นี่ */
+    max-width: none !important;   /* ยกเลิก max-width 480 ของกฎรวม */
+
+    opacity: 0.048;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* =============================================== */
+/* 7.4 FOOT MASSAGE STORY (นวดเท้า)               */
+/* =============================================== */
+
+.foot-story {
+    background: #5a181a;
+    padding: 4rem 0;
+}
+
+/* ========================================================= */
+/* foot STORY – รูปหลัก                                     */
+/* ========================================================= */
+.intro-5 {
+    width: 120%;
+    max-width: 480px;
+    border-radius: 80px;
+    object-fit: cover;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+    position: relative;
+    z-index: 2;
+}
+
+/* ========================================================= */
+/* foot Y – รูปตกแต่งเฉพาะส่วนนี้                       */
+/* ========================================================= */
+.section-decor-Foot {
+    position: absolute;
+    bottom: -50px;
+    
+    inset-inline: 0;    /* = left: 0; right: 0; */
+    margin-inline: auto; /* = center แบบ block */
+
+    width: 400px !important;      /* ปรับความกว้างช้างที่นี่ */
+    max-width: none !important;   /* ยกเลิก max-width 480 ของกฎรวม */
+
+    opacity: 0.048;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* =============================================== */
+/* 7.5 BACK SCRUB + MASSAGE STORY (ขัดผิว + นวด)  */
+/* =============================================== */
+
+/* story-section ธรรมดา ใช้กับ ขัดผิว + นวด และ section story ทั่วไป */
+.story-section {
+    background: #4d1815;
+    padding: 4rem 0;
+}
+
+/* ========================================================= */
+/* sb STORY – รูปหลัก                                      */
+/* ========================================================= */
+.intro-6 {
+    width: 120%;
+    max-width: 480px;
+    border-radius: 80px;
+    object-fit: cover;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+    position: relative;
+    z-index: 2;
+}
+
+/* ========================================================= */
+/* sb Y – รูปตกแต่งเฉพาะส่วนนี้                            */
+/* ========================================================= */
+.section-decor-sb {
+    position: absolute;
+    bottom: -20px;
+    
+    inset-inline: 0;    /* = left: 0; right: 0; */
+    margin-inline: auto; /* = center แบบ block */
+
+    width: 400px !important;      /* ปรับความกว้างช้างที่นี่ */
+    max-width: none !important;   /* ยกเลิก max-width 480 ของกฎรวม */
+
+    opacity: 0.048;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* =============================================== */
+/* 7.6 CAUTION STORY (ใครควรระวังการนวด)         */
+/* =============================================== */
+
+/* พื้นหลัง section ข้อควรระวัง */
+.story-section--caution {
+    background: #4d1815;
+    padding: 4rem 0;
+}
+
+/* คอลัมน์รูปใน caution: ทำให้แคบลงและไม่มีเงา */
+.story-section--caution .story-image {
+    background: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+
+    flex: 0 0 280px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* รูปใน caution – ขยายและยกขึ้นด้านบน */
+.story-section--caution .story-image img {
+    width: 180%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    margin: 0 auto;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+
+    transform: translateY(-90px);
+}
+
+@media (max-width: 900px) {
+    .story-section--caution .story-image img {
+        width: 100%;
+        transform: translateY(-20px);
+    }
+}
+
+
+/* ให้เนื้อหาทั้งหมดใน caution ชิดด้านบน */
+.story-section--caution .story-inner {
+    align-items: flex-start;
+}
+
+/* ========================================================= */
+/* cl STORY – รูปหลัก                                      */
+/* ========================================================= */
+.intro-7 {
+    width: 120%;
+    max-width: 480px;
+    border-radius: 80px;
+    object-fit: cover;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+    position: relative;
+    z-index: 2;
+}
+
+/* ========================================================= */
+/* cl Y – รูปตกแต่งเฉพาะส่วนนี้ (ปิดไว้)                  */
+/* ========================================================= */
+
+.section-decor-cl {
+    position: absolute;
+    bottom: -710px;
+    
+    inset-inline: 0;    /* = left: 0; right: 0; */
+    margin-inline: auto; /* = center แบบ block */
+    
+    width: 450px !important;      /* ปรับความกว้างช้างที่นี่ */
+    max-width: none !important;   /* ยกเลิก max-width 480 ของกฎรวม */
+    opacity: 1;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* =============================================== */
+/* 7.7 AFTERCARE STORY (นวดแล้วควรทำอย่างไร)      */
+/* =============================================== */
+
+/* พื้นหลัง section หลังนวด */
+.aftercare-story {
+    background: #4d1815;   /* ใช้โทนเดียวกับ caution จะได้ต่อเนื่อง */
+    padding: 1rem 0;
+}
+
+/* ลำดับคอลัมน์พื้นฐาน: รูปอยู่ขวา ข้อความอยู่ซ้าย */
+.aftercare-story .story-inner {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+/*   1) เอากรอบและเงาของรูปออก */
+.aftercare-story .story-image {
+    background: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* รูปภาพหลังนวด */
+.aftercare-image {
+    width: 130%;
+    max-width: 480px;
+
+    border-radius: 0 !important;  /* ไม่มีโค้ง */
+    box-shadow: none !important;  /* ไม่มีเงา */
+    background: none !important;
+    transform: translateX(50px);
+    object-fit: contain;
+}
+
+/*   2) ขยับข้อความไปทางซ้าย    */
+.aftercare-story .story-text {
+    margin-left: 25px;
+}
+
+/*   3) Layout สำหรับมือถือ      */
+@media (max-width: 900px) {
+    .aftercare-story .story-inner {
+        flex-direction: column;
+        align-items: center;
+        text-align: left;
+    }
+
+    .aftercare-story .story-text {
+        margin-left: 0 !important;
+    }
+
+    .aftercare-image {
+        width: 100%;
+        max-width: 420px;
+        transform: none;
+    }
+}
+
+
+/* =============================================== */
+/* 7.7 NAILS STORY (ทำเล็บมือ / ทำเล็บเท้า)       */
+/* =============================================== */
+
+.story-section--nails {
+    background: #5a181a;   /* โทนแดงอมม่วง */
+    padding: 4rem 0;
+}
+
+/* รูปใน section ทำเล็บ – ถ้าอยากเล็กลง/ใหญ่ขึ้น ปรับตรงนี้ */
+.story-section--nails .story-image img {
+    width: 100%;
+    max-width: 520px;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.45);
+    object-fit: cover;
+    transform: translateX(10px);
+}
+
+
+/* =============================================== */
+/* 7.8 STORY RESPONSIVE – จอเล็ก (มือถือ/แท็บเล็ต) */
+/* =============================================== */
+
+@media (max-width: 780px) {
+
+    /* ทุก story เรียงบน–ล่างแทนซ้าย–ขวา */
+    .story-inner {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .story-inner.reverse {
+        flex-direction: column;
+    }
+
+    .story-text {
+        text-align: left;
+    }
+
+    .story-image {
+        justify-content: center;
+    }
+
+    /* ป้องกันรูปเกินจอบนมือถือ – ลดจาก 120% เหลือ 100% */
+    .intro-main,
+    .intro-2,
+    .intro-3,
+    .intro-4,
+    .intro-5,
+    .intro-6,
+    .intro-7 {
+        width: 100%;
+        max-width: 480px;
+    }
+
+    /* รูปตกแต่งใหญ่ ๆ ให้เบาลงนิดหน่อย */
+    .section-decor {
+        width: 480px;
+        left: -120px;
+        bottom: -60px;
+        opacity: 0.25;
+    }
+}
+
+/* ซ่อนรูปตกแต่งที่ใหญ่มากบนจอเล็กมาก ๆ เพื่อไม่ให้ล้น */
+@media (max-width: 600px) {
+    .intro-decor,
+    .section-decor,
+    .section-decor-aroma,
+    .section-decor-Hot,
+    .section-decor-Foot,
+    .section-decor-sb {
+        display: none;
+    }
+}
+
+
+
+/* =============================================== */
+/* 8. PRICE TABLES – ตารางราคา                      */
+/* =============================================== */
+
+/* หัวข้อ Preise / ราคา / Prices ให้เด่นขึ้น */
+#prices .section-title {
+    font-family: "Georgia", serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: #f9d37a;
+    text-shadow: 0 3px 8px rgba(0,0,0,0.45);
+    margin-bottom: 2.5rem;
+    margin-top: 0.8rem;
+}
+
+#prices {
+    background-color: #3a1314;
+    padding: 3rem 0;
+}
+
+/* สไตล์ตารางราคาพื้นฐาน */
+.price-table {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    border-collapse: collapse;
+    font-size: 1.1rem;
+    background: rgba(24, 8, 6, 0.9);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+    table-layout: fixed;
+}
+
+.price-table thead {
+    background: rgba(249, 211, 122, 0.1);
+    color: #f9d37a;
+    font-size: 1.1rem;
+}
+
+.price-table th,
+.price-table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+}
+
+.price-table tbody tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+/* คอลัมน์ตารางนวด (บริการ / 30 / 60 / 90 นาที) */
+.price-table-massage col.col-service {
+    width: 46%;
+}
+
+.price-table-massage col.col-30,
+.price-table-massage col.col-60,
+.price-table-massage col.col-90 {
+    width: 18%;
+}
+
+.price-table-massage th:nth-child(2),
+.price-table-massage th:nth-child(3),
+.price-table-massage th:nth-child(4) {
+    text-align: center;
+}
+
+.price-table-massage td:nth-child(2),
+.price-table-massage td:nth-child(3),
+.price-table-massage td:nth-child(4) {
+    text-align: center;
+}
+
+/* คอลัมน์ตารางทำเล็บ */
+.price-table-nails col.col-service {
+    width: 45%;
+}
+
+.price-table-nails col.col-price {
+    width: 55%;
+}
+
+.price-table-nails th:nth-child(2),
+.price-table-nails td:nth-child(2) {
+    text-align: center;
+}
+
+/* ตารางบนจอเล็ก – ให้เลื่อนในแนวนอนได้ถ้าจอแคบมาก */
+@media (max-width: 600px) {
+    .price-table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+
+/* =============================================== */
+/* 9. GALLERY – รูปร้านคุณก้อย                      */
+/* =============================================== */
+
+/* หัวข้อภาษาไทย “ร้านคุณก้อย” */
+.section-gallery .section-title.lang-th {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    margin-top: 0.5rem;
+    color: #f9d37a;
+    letter-spacing: 1px;
+}
+
+.section-gallery .section-title.lang-de,
+.section-gallery .section-title.lang-en {
+    font-size: 2.2rem;
+    font-weight: 600;
+}
+
+.section-gallery {
+    background: #4d1815;
+    padding: 4rem 0;
+}
+
+/* กล่อง container ของแกลเลอรี */
+.section-gallery .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* กริดรูปภาพ 3 คอลัมน์ */
+.gallery-grid {
+    margin-top: 2.5rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    margin-left: auto;
+    margin-right: auto;
+    transform: translateX(-50px); /* ขยับกริดไปทางซ้ายเล็กน้อย */
+}
+
+/* กล่องรูปแต่ละใบ */
+.gallery-item {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: inherit;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.gallery-item img:hover {
+    transform: translateY(0px) scale(1.01);
+    box-shadow: 0 16px 30px rgba(0,0,0,0.45);
+}
+
+@media (max-width: 900px) {
+    .gallery-grid {
+        transform: none;      /* ไม่ต้องเลื่อนซ้ายในจอเล็ก */
+    }
+}
+
+/* แกลเลอรีบนจอขนาดต่าง ๆ */
+@media (max-width: 768px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 540px) {
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* =============================================== */
+/* 10. CONTACT & FOOTER – ติดต่อ/ที่อยู่/เวลาเปิด + ฟุตเตอร์ */
+/* =============================================== */
+
+/* ชื่อร้านหัวคอลัมน์บนสุดของ section ติดต่อ */
+.contact-header {
+    grid-column: 1 / -1;
+    text-align: center;
+    margin-bottom: -2.5rem;
+}
+
+.contact-header-title {
+    font-family: "Georgia", serif;
+    font-size: 2.3rem;
+    font-weight: bold;
+    color: #f7d186;
+    margin: 0 0 1rem;
+}
+
+/* กล่อง 3 คอลัมน์: ติดต่อ / ที่อยู่ / เวลาเปิด */
+.contact-section {
+    background: #5b1e1a;
+    padding: 3rem 0 4rem;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 3rem;
+}
+
+/* คอลัมน์เนื้อหาทั้ง 3 */
+.contact-column {
+    color: #ffe8d1;
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+/* หัวข้อย่อยในคอลัมน์ (Kontakt / Adresse / Öffnungszeiten) */
+.contact-title {
+    font-family: "Georgia", serif;
+    font-size: 1.6rem;
+    color: #f9d37a;
+    margin-bottom: 0.8rem;
+}
+
+/* ลิงก์เบอร์โทร / WhatsApp */
+.contact-section a {
+    color: #f6d47a;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(246, 212, 122, 0.4);
+}
+
+.contact-section a:hover {
+    border-bottom-color: rgba(246, 212, 122, 1);
+}
+
+/* ฟุตเตอร์ล่างสุด */
+.footer {
+    padding: 1rem 0 1.5rem;
+    text-align: center;
+    font-size: 1rem;
+    color: #f6dec4;
+    border-top: 1px solid rgba(249, 211, 122, 0.25);
+}
+
+
+
+
+
+/* =============================================== */
+/* 11. GOOGLE MAP SECTION – แผนที่ Google Maps     */
+/* =============================================== */
+
+.map-section {
+    background: #4d1815;
+    padding: 3rem 0 0 0;
+    padding-top: 0;
+}
+
+/* iframe แผนที่แบบเต็มความกว้าง */
+.map-container iframe {
+    width: 100%;
+    height: 450px;
+    border: 0;
+    display: block;
+}
+
+/* คลิกทั้ง iframe เพื่อเปิด Google Maps แยกแท็บ */
+.map-container a {
+    display: block;
+}
+
+/* เลื่อนแผนที่ขึ้นมาชิด section ก่อนหน้าเล็กน้อย */
+.map-container {
+    margin-top: -30px;
+}
+
+/* =============================================== */
+/* 11. FAQ SECTION (คำถามที่พบบ่อย)               */
+/* =============================================== */
+
+.section-faq {
+    background: #4d1815;        /* โทนเดียวกับ section story บางอัน */
+    padding: 4rem 0;
+}
+
+.section-faq .section-title {
+    margin-bottom: 2rem;
+    font-size: 2.2rem;
+}
+
+/* กล่องรวม FAQ ทั้งหมด */
+.faq-list {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;                  /* ระยะห่างระหว่างคำถาม */
+}
+
+/* กล่องแต่ละคำถาม – ใช้ <details> */
+.faq-item {
+    background: rgba(24, 8, 6, 0.9);
+    border-radius: 14px;
+    border: 1px solid rgba(249, 211, 122, 0.4);
+    padding: 0.6rem 1rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+/* แถบคำถาม (summary) */
+.faq-question {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    font-family: "Georgia", "Times New Roman", serif;
+    font-size: 1.3rem;
+    color: #f9d37a;
+    padding: 0.4rem 0;
+}
+
+/* ซ่อนไอคอนสามเหลี่ยม default ของบางเบราว์เซอร์ */
+.faq-question::-webkit-details-marker {
+    display: none;
+}
+
+/* ลูกศรขวา/ลง */
+.faq-question::after {
+    content: "▾";
+    margin-left: 0.75rem;
+    font-size: 1.5rem;
+    transition: transform 0.2s ease;
+}
+
+/* ตอนเปิด details ให้หมุนลูกศร */
+.faq-item[open] .faq-question::after {
+    transform: rotate(180deg);
+}
+
+/* กล่องคำตอบ */
+.faq-answer {
+    padding: 0.3rem 0 0.6rem;
+    border-top: 1px solid rgba(249, 211, 122, 0.25);
+    margin-top: 0.4rem;
+}
+
+/* ตัวหนังสือคำตอบ */
+.faq-answer p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #f7e7dc;
+    margin: 0.4rem 0;
+}
+
+/* มือถือ: ย่อ padding ให้เล็กลงหน่อย */
+@media (max-width: 600px) {
+    .faq-item {
+        padding: 0.5rem 0.8rem;
+    }
+
+    .faq-question {
+        font-size: 1rem;
+    }
+
+    .faq-answer p {
+        font-size: 0.95rem;
+    }
+}
+
+
+
+
+
+/* =============================================== */
+/* SECTION: LEGAL LINKS (Impressum / Datenschutz)  */
+/* แถบบรรทัดลิงก์ใต้แผนที่                         */
+/* =============================================== */
+
+.legal-links {
+    background: #411a10;           /* พื้นหลังดำเหมือนตัวอย่างที่ส่งมา */
+    padding: 1.2rem 0;
+}
+
+.legal-links-inner {
+    display: flex;
+    flex-wrap: wrap;               /* จอเล็กให้ตัดบรรทัดได้ */
+    justify-content: center;       /* จัดให้อยู่กลางแนวนอน */
+    gap: 1.5rem;                   /* ระยะห่างระหว่างลิงก์ */
+    font-size: 1.2rem;
+}
+
+.legal-links a {
+    color: #ffffff;
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+}
+
+.legal-links a:hover {
+    text-decoration-thickness: 2px;
+}
+
+
+/* =============================================== */
+/* LEGAL PAGES (Impressum / Datenschutz)           */
+/* =============================================== */
+
+.legal-page {
+    background: #4d1815;        /* โทนเดียวกับ story-section */
+    padding: 4rem 0;
+}
+
+.legal-title {
+    text-align: center;
+    font-family: "Georgia", serif;
+    font-size: 2.2rem;
+    color: #f9d37a;
+    margin-top: 0;
+    margin-bottom: 2rem;
+}
+
+.legal-content {
+    max-width: 800px;
+    margin: 0 auto 2.5rem auto;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #fdf7f2;
+}
+
+/* =============================================== */
+/* LEGAL NOTE (หมายเหตุใต้ Impressum)            */
+/* =============================================== */
+
+.legal-note {
+    text-align: center;        /* จัดกลาง */
+    margin-top: 2rem;          /* ระยะห่างด้านบน */
+    color: #f9d37a;            /* สีทองเข้ากับเว็บ */
+    font-size: 1.1rem;         /* ขนาดฟอนต์ใหญ่ขึ้นเล็กน้อย */
+}
+
+
+
+/* =============================================== */
+/* 12. GLOBAL RESPONSIVE RULES – ปรับเว็บทั้งหน้าในจอเล็ก */
+/* =============================================== */
+
+/* <= 900px: story sections (บางอัน) ซ้อนกัน */
+@media (max-width: 900px) {
+    .story-inner {
+        flex-direction: column-reverse;
+        text-align: center;
+    }
+
+    .reverse-layout {
+        flex-direction: column;
+    }
+
+    .hotstone-story .story-inner,
+    .foot-story .story-inner,
+    .story-section .story-inner {
+        flex-direction: column;
+    }
+
+    .story-text {
+        text-align: justify;
+    }
+}
+
+/* <= 720px: ซ่อน nav บนมือถือ และจัด hero ใหม่ */
+@media (max-width: 720px) {
+
+    .nav {
+        display: none;
+    }
+
+    .topbar-inner {
+        justify-content: space-between;
+    }
+
+    .hero {
+        padding-top: 3rem;
+    }
+
+    .hero-inner {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-text {
+        margin-top: 1rem;
+    }
+
+    .hero-sub {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-logo {
+        margin-top: 0;
+        flex: 0 0 auto;
+    }
+
+    .hero-logo-img {
+        max-height: 230px;
+        height: auto;
+        max-width: 260px;
+    }
+
+    .container {
+        padding: 0 1.2rem;
+    }
+}
+
+/* =============================================== */
+/* 13. EXTRA MOBILE TUNING – ปรับให้เหมาะกับมือถือ */
+/* =============================================== */
+
+/* หน้าจอกว้าง <= 768px (มือถือแนวตั้ง + แท็บเล็ตเล็ก) */
+@media (max-width: 768px) {
+
+    body {
+        font-size: 0.95rem;
+    }
+
+    .container {
+        padding: 0 1rem;
+    }
+
+    /* ทำให้หัวข้อและข้อความอ่านง่ายขึ้นบนมือถือ */
+    .hero-title {
+        font-size: 1.8rem;
+    }
+
+    .hero-sub {
+        font-size: 0.95rem;
+    }
+
+    .story-title {
+        font-size: 1.6rem;
+    }
+
+    .story-text p,
+    .welcome-text,
+    .intro-text p,
+    .intro-tagline {
+        font-size: 1rem;
+        line-height: 1.7;
+    }
+
+    /* กันรูปหลักไม่ให้กว้างเกินหน้าจอ */
+    .intro-main,
+    .intro-2,
+    .intro-3,
+    .intro-4,
+    .intro-5,
+    .intro-6,
+    .intro-7,
+    .story-image img,
+    .aftercare-image {
+        width: 100%;
+        max-width: 420px;
+        transform: none;
+    }
+
+    /* hero logo ไม่ให้โดดแปลก ๆ บนมือถือ */
+    .hero-logo {
+        margin-top: 0;
+    }
+
+    /* ลดเงาและโค้งมนบนจอเล็กนิดหน่อยให้ดูเนียน */
+    .story-image img {
+        border-radius: 16px;
+        box-shadow: 0 8px 18px rgba(0,0,0,0.35);
+    }
+}
+
+/* หน้าจอเล็กมาก <= 480px (มือถือเล็ก) */
+@media (max-width: 480px) {
+
+    .hero {
+        padding: 2.5rem 0 2rem;
+    }
+
+    .hero-title {
+        font-size: 1.6rem;
+    }
+
+    .primary-btn {
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin: 0 0 0.5rem 0;
+    }
+
+    /* ลด padding แต่ละ section ลงให้ไม่ยาวเกิน */
+    .section,
+    .story-section,
+    .thai-massage-story,
+    .aroma-story,
+    .hotstone-story,
+    .foot-story,
+    .story-section--nails,
+    .section-gallery,
+    .section-faq {
+        padding: 2.5rem 0;
+    }
+
+    /* contact section เว้นระยะหายใจหน่อย */
+    .contact-section {
+        padding: 2.5rem 0 3rem;
+    }
+
+    /* ตารางราคา – ให้ตัวหนังสือไม่แน่นเกิน */
+    .price-table th,
+    .price-table td {
+        padding: 0.6rem 0.7rem;
+        font-size: 0.95rem;
+    }
+}
+
+/* =============================================== */
+/* 14. MOBILE LANDSCAPE TUNING – มือถือแนวนอน    */
+/* =============================================== */
+
+@media (max-width: 900px) and (orientation: landscape) {
+
+    /* ฐานตัวอักษรให้เล็กลงนิด */
+    body {
+        font-size: 0.85rem;
+    }
+
+    .container {
+        padding: 0 0.8rem;
+    }
+
+    /* ลด padding ทุก section ให้เตี้ยลง ไม่กินความสูงจอ */
+    .hero,
+    .section,
+    .story-section,
+    .thai-massage-story,
+    .aroma-story,
+    .hotstone-story,
+    .foot-story,
+    .story-section--nails,
+    .section-gallery,
+    .section-faq,
+    .contact-section {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+
+    /* HERO ให้เตี้ยลง + ตัวหนังสือเล็กลง */
+    .hero {
+        padding-top: 2.2rem;
+        padding-bottom: 1.8rem;
+    }
+
+    .hero-title {
+        font-size: 1.4rem;
+        line-height: 1.3;
+    }
+
+    .hero-sub {
+        font-size: 0.9rem;
+        max-width: 26rem;
+    }
+
+    .hero-logo {
+        margin-top: 0;
+        flex: 0 0 160px;
+    }
+
+    .hero-logo-img {
+        max-height: 150px;
+        max-width: 180px;
+    }
+
+    .primary-btn {
+        padding: 0.55rem 1.2rem;
+        font-size: 0.85rem;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.35);
+    }
+
+    /* หัวข้อใหญ่ต่าง ๆ ให้เล็กลง */
+    .section-title,
+    .story-title,
+    .contact-header-title {
+        font-size: 1.4rem;
+        margin-bottom: 1.2rem;
+    }
+
+    .legal-title {
+        font-size: 1.6rem;
+    }
+
+    /* เนื้อความยาว ๆ ให้ใช้ฟอนต์เล็กลงหน่อย */
+    .story-text p,
+    .welcome-text,
+    .intro-text p,
+    .intro-tagline {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+
+    /* INTRO รูป + ตัวหนังสือ ใช้พื้นที่แนวนอนได้ดีขึ้น */
+    .intro-container {
+        gap: 1.5rem;
+    }
+
+    .intro-main {
+        width: 100%;
+        max-width: 360px;
+        border-radius: 40px;
+    }
+
+    /* ซ่อน/ลดผลกระทบของรูปตกแต่งใหญ่ ๆ ในแนวนอน */
+    .intro-decor,
+    .section-decor,
+    .section-decor-aroma,
+    .section-decor-Hot,
+    .section-decor-Foot,
+    .section-decor-sb {
+        opacity: 0.03;
+        transform: scale(0.85);
+    }
+
+    /* STORY ทั่วไป – ให้รูปไม่ใหญ่เกินไปในจอเตี้ย ๆ */
+    .story-image img:not(.section-decor):not(.intro-decor) {
+        max-width: 360px;
+        border-radius: 16px;
+        box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+    }
+
+    /* ส่วน caution (ใครควรระวัง) ยกภาพขึ้นน้อยลงหน่อย */
+    .story-section--caution .story-image img {
+        width: 120%;
+        transform: translateY(-30px);
+    }
+
+    /* AFTERCARE – ลดการขยับภาพไปด้านขวาในแนวนอน */
+    .aftercare-image {
+        width: 110%;
+        max-width: 360px;
+        transform: translateX(20px);
+    }
+
+    /* ทำเล็บ – รูปไม่ต้องใหญ่เกินไป */
+    .story-section--nails .story-image img {
+        max-width: 380px;
+        transform: translateX(0);
+    }
+
+    /* ตารางราคา – ฟอนต์และ padding เล็กลง */
+    .price-table th,
+    .price-table td {
+        padding: 0.5rem 0.7rem;
+        font-size: 0.9rem;
+    }
+
+    /* Gallery – ใช้ 3 คอลัมน์ได้ แต่ลดช่องไฟเล็กน้อย */
+    .gallery-grid {
+        gap: 0.35rem;
+        margin-top: 1.5rem;
+        transform: none;   /* เอา translateX(-50px) ออกในแนวนอนมือถือ */
+    }
+
+    /* FAQ – หัวข้อ + เนื้อหาย่อขนาด */
+    .faq-question {
+        font-size: 1rem;
+    }
+
+    .faq-answer p {
+        font-size: 0.9rem;
+    }
+
+    /* Contact – ฟอนต์เล็กลงนิดให้ไม่ล้นแนวตั้ง */
+    .contact-title {
+        font-size: 1.3rem;
+    }
+
+    .contact-column {
+        font-size: 0.95rem;
+    }
+
+    /* ปุ่ม WhatsApp ลอย – ย่อขนาดในแนวนอนด้วย */
+    .whatsapp-float {
+        width: 52px;
+        height: 52px;
+        right: 14px;
+        bottom: 14px;
+    }
+
+    .whatsapp-float img {
+        width: 26px;
+        height: 26px;
+    }
+}
+
+
+
+
+
+
+
+
