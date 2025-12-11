@@ -1,6 +1,10 @@
 /* =============================================== */
-/* 0. GLOBAL VARIABLES (THEME CONFIG)              */
+/* 0. GLOBAL VARIABLES & FONTS (THEME CONFIG)      */
 /* =============================================== */
+
+/* ดึงฟอนต์ภาษาไทยสวยๆ มาใช้ (แก้สระลอยใน iPhone/iPad) */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@400;700&family=Noto+Sans+Thai:wght@300;400;600&display=swap');
+
 :root {
     /* Main Background Colors */
     --bg-main: #6b1d1b;         /* Red/Brown (Body) */
@@ -18,6 +22,12 @@
     --color-text-sub: #fbe5c8;  /* Subtext */
     --color-text-dark: #3b1411; /* Dark Text (on Gold) */
     
+    /* Fonts Settings (แก้บั๊กภาษาไทย) */
+    /* ใช้ Noto Serif Thai แทน Georgia เพื่อความสวยงามและถูกต้อง */
+    --font-heading: "Noto Serif Thai", "Georgia", "Times New Roman", serif;
+    /* ใช้ Noto Sans Thai เป็นฟอนต์เนื้อหา */
+    --font-body: "Noto Sans Thai", system-ui, -apple-system, sans-serif;
+
     /* Overlay / Shadows */
     --overlay-card: rgba(24, 8, 6, 0.8);
     --shadow-default: 0 10px 25px rgba(0, 0, 0, 0.35);
@@ -49,7 +59,7 @@
 
 body {
     margin: 0;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-family: var(--font-body); /* ใช้ฟอนต์ใหม่ */
     background-color: var(--bg-main);
     color: var(--color-text-main);
     min-height: 100vh;
@@ -85,12 +95,13 @@ body {
 
 /* โลโก้ตัวหนังสือซ้ายบน "Khun Koy Thai Massage" */
 .logo-text {
-    font-family: "Georgia", "Times New Roman", serif;
+    font-family: var(--font-heading);
     font-weight: 700;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.05em;
     font-size: 1.05rem;
     text-transform: uppercase;
     color: var(--color-gold);
+    text-decoration: none; /* เพื่อให้เป็นลิงก์สวยๆ */
 }
 
 /* เมนูนำทาง หน้าแรก / บริการ / ราคา / ติดต่อ */
@@ -100,7 +111,7 @@ body {
 }
 
 .nav-link {
-    font-family: "Georgia", "Times New Roman", serif;
+    font-family: var(--font-heading);
     font-size: 1rem;
     text-decoration: none;
     color: var(--color-text-main);
@@ -125,6 +136,7 @@ body {
     border-radius: 999px;
     cursor: pointer;
     transition: 0.2s ease-in-out;
+    font-family: var(--font-body);
 }
 
 .lang-switch button:hover {
@@ -253,7 +265,7 @@ body {
     padding: 4rem 0 3rem;
     background-image:
         linear-gradient(180deg, rgba(126, 37, 34, 0.85), rgba(91, 24, 22, 0.9)),
-        url("thai-bg.webp"); /* แก้ไขกลับเป็น .webp */
+        url("thai-bg.webp"); 
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -290,7 +302,7 @@ body {
 }
 
 .hero-title {
-    font-family: "Georgia", "Times New Roman", serif;
+    font-family: var(--font-heading);
     font-size: clamp(2rem, 3vw + 1rem, 2.7rem);
     line-height: 1.2;
     margin: 0 0 0.75rem;
@@ -316,6 +328,7 @@ body {
     font-size: 0.95rem;
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
     margin-right: 0.5rem;
+    font-family: var(--font-body);
 }
 
 .primary-btn:hover {
@@ -337,7 +350,7 @@ body {
 
 .section-title {
     text-align: center;
-    font-family: "Georgia", "Times New Roman", serif;
+    font-family: var(--font-heading);
     font-size: 1.7rem;
     margin-top: 0;
     margin-bottom: 2rem;
@@ -378,6 +391,7 @@ body {
 }
 
 .card-title {
+    font-family: var(--font-heading);
     font-size: 1.05rem;
     margin-top: 0;
     margin-bottom: 0.4rem;
@@ -453,7 +467,7 @@ body {
 
 /* หัวข้อ WELCOME 3 ภาษา */
 .intro-text h2 {
-    font-family: "Georgia", serif;
+    font-family: var(--font-heading);
     color: var(--color-gold);
     font-size: 2rem;
     margin-bottom: 1rem;
@@ -539,7 +553,7 @@ body {
 
 /* หัวข้อเรื่องในแต่ละการนวด */
 .story-title {
-    font-family: "Georgia", serif;
+    font-family: var(--font-heading);
     font-size: 2rem;
     color: var(--color-gold);
     margin-bottom: 1.2rem;
@@ -955,6 +969,7 @@ body {
 }
 
 .section-gallery .section-title.lang-th {
+    font-family: var(--font-heading);
     font-size: 2.2rem;
     font-weight: 700;
     margin-bottom: 1rem;
@@ -965,6 +980,7 @@ body {
 
 .section-gallery .section-title.lang-de,
 .section-gallery .section-title.lang-en {
+    font-family: var(--font-heading);
     font-size: 2.2rem;
     font-weight: 600;
 }
@@ -1029,7 +1045,7 @@ body {
 }
 
 .contact-header-title {
-    font-family: "Georgia", serif;
+    font-family: var(--font-heading);
     font-size: 2.3rem;
     font-weight: bold;
     color: #f7d186;
@@ -1049,7 +1065,7 @@ body {
 }
 
 .contact-title {
-    font-family: "Georgia", serif;
+    font-family: var(--font-heading);
     font-size: 1.6rem;
     color: var(--color-gold);
     margin-bottom: 0.8rem;
@@ -1117,7 +1133,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-family: "Georgia", "Times New Roman", serif;
+    font-family: var(--font-heading);
     font-size: 1.3rem;
     color: var(--color-gold);
     padding: 0.4rem 0;
@@ -1173,7 +1189,7 @@ body {
 
 /* Legal Page & Note */
 .legal-page { background: var(--bg-section-1); padding: 4rem 0; }
-.legal-title { text-align: center; font-family: "Georgia", serif; font-size: 2.2rem; color: var(--color-gold); margin: 0 0 2rem; }
+.legal-title { text-align: center; font-family: var(--font-heading); font-size: 2.2rem; color: var(--color-gold); margin: 0 0 2rem; }
 .legal-content { max-width: 800px; margin: 0 auto 2.5rem auto; font-size: 1.2rem; line-height: 1.8; color: var(--color-text-main); }
 .legal-note { text-align: center; margin-top: 2rem; color: var(--color-gold); font-size: 1.1rem; }
 
