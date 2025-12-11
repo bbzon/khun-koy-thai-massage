@@ -1,0 +1,3 @@
+User-agent: * 
+Allow: /
+Sitemap: https://bbzon.github.io/khun-koy-thai-massage/sitemap.xml
