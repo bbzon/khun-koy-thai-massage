@@ -2,7 +2,7 @@
 /* 0. GLOBAL VARIABLES & FONTS (THEME CONFIG)      */
 /* =============================================== */
 
-/* ดึงฟอนต์ภาษาไทยสวยๆ มาใช้ (แก้สระลอยใน iPhone/iPad) */
+/* ดึงฟอนต์ Noto Thai มาสำรองไว้สำหรับแก้สระลอย */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@400;700&family=Noto+Sans+Thai:wght@300;400;600&display=swap');
 
 :root {
@@ -22,11 +22,15 @@
     --color-text-sub: #fbe5c8;  /* Subtext */
     --color-text-dark: #3b1411; /* Dark Text (on Gold) */
     
-    /* Fonts Settings (แก้บั๊กภาษาไทย) */
-    /* ใช้ Noto Serif Thai แทน Georgia เพื่อความสวยงามและถูกต้อง */
-    --font-heading: "Noto Serif Thai", "Georgia", "Times New Roman", serif;
-    /* ใช้ Noto Sans Thai เป็นฟอนต์เนื้อหา */
-    --font-body: "Noto Sans Thai", system-ui, -apple-system, sans-serif;
+    /* --- FONTS SETTINGS (สูตรแก้สระลอย iOS แบบคงฟอนต์เดิมไว้) --- */
+    
+    /* 1. ฟอนต์หัวข้อ (Headings) */
+    /* ภาษาอังกฤษใช้: Georgia (เดิม) -> ถ้าเป็นไทยใช้: Noto Serif Thai */
+    --font-heading: "Georgia", "Times New Roman", "Noto Serif Thai", serif;
+
+    /* 2. ฟอนต์เนื้อหา (Body) */
+    /* ภาษาอังกฤษใช้: System Fonts (เดิม) -> ถ้าเป็นไทยใช้: Noto Sans Thai */
+    --font-body: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans Thai", sans-serif;
 
     /* Overlay / Shadows */
     --overlay-card: rgba(24, 8, 6, 0.8);
@@ -59,7 +63,7 @@
 
 body {
     margin: 0;
-    font-family: var(--font-body); /* ใช้ฟอนต์ใหม่ */
+    font-family: var(--font-body); /* ใช้สูตรฟอนต์ผสม */
     background-color: var(--bg-main);
     color: var(--color-text-main);
     min-height: 100vh;
@@ -93,7 +97,7 @@ body {
     padding: 0.4rem 0;
 }
 
-/* โลโก้ตัวหนังสือซ้ายบน "Khun Koy Thai Massage" */
+/* โลโก้ตัวหนังสือซ้ายบน */
 .logo-text {
     font-family: var(--font-heading);
     font-weight: 700;
@@ -101,10 +105,10 @@ body {
     font-size: 1.05rem;
     text-transform: uppercase;
     color: var(--color-gold);
-    text-decoration: none; /* เพื่อให้เป็นลิงก์สวยๆ */
+    text-decoration: none;
 }
 
-/* เมนูนำทาง หน้าแรก / บริการ / ราคา / ติดต่อ */
+/* เมนูนำทาง */
 .nav {
     display: flex;
     gap: 1rem;
@@ -124,7 +128,7 @@ body {
     border-bottom: 1px solid var(--color-gold);
 }
 
-/* ปุ่มเปลี่ยนภาษา TH / DE / EN */
+/* ปุ่มเปลี่ยนภาษา */
 .lang-switch button {
     background: transparent;
     border: 2px solid var(--color-gold);
@@ -179,36 +183,29 @@ body {
     position: fixed;
     right: 18px;
     bottom: 18px;
-
     width: 60px;
     height: 60px;
-
-    background: #25D366;              /* สีพื้นปุ่ม (เขียว WhatsApp) */
+    background: #25D366;
     border-radius: 50%;
     box-shadow: 0 8px 20px rgba(0,0,0,0.45);
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     text-decoration: none;
-    z-index: 300;                      /* ให้ทับทุกอย่างอื่น */
+    z-index: 300;
 }
 
-/* รูปไอคอนด้านใน */
 .whatsapp-float img {
     width: 32px;
     height: 32px;
     display: block;
 }
 
-/* เอฟเฟกต์ตอน hover บนคอม */
 .whatsapp-float:hover {
     transform: translateY(-2px);
     box-shadow: 0 12px 26px rgba(0,0,0,0.55);
 }
 
-/* มือถือจอเล็ก – ย่อปุ่มลงนิดหน่อย */
 @media (max-width: 480px) {
     .whatsapp-float {
         right: 14px;
@@ -216,7 +213,6 @@ body {
         width: 52px;
         height: 52px;
     }
-
     .whatsapp-float img {
         width: 28px;
         height: 28px;
@@ -225,29 +221,25 @@ body {
 
 /* ============ MOBILE NAV LOGIC ============ */
 @media (max-width: 720px) {
-
-    /* แสดงปุ่ม hamburger */
     .nav-toggle {
         display: flex;
     }
 
-    /* ซ่อนเมนูหลักในแถบบนก่อนกด */
     .nav {
         position: absolute;
-        top: 100%;                    /* อยู่ใต้ .topbar */
+        top: 100%;
         right: 1.5rem;
         background: rgba(43, 15, 13, 0.97);
         border: 1px solid rgba(249, 211, 122, 0.3);
         border-radius: 10px;
         padding: 0.75rem 1rem;
-        display: none;                /* ปิดเริ่มต้น */
+        display: none;
         flex-direction: column;
         gap: 0.5rem;
         min-width: 160px;
         z-index: 999;
     }
 
-    /* ตอนเปิดเมนู (มีคลาส .open จาก JS) */
     .nav.open {
         display: flex;
     }
@@ -258,11 +250,12 @@ body {
 }
 
 /* =============================================== */
-/* 4. HERO SECTION + CTA – โลโก้ใหญ่ + ข้อความ + ปุ่มจอง */
+/* 4. HERO SECTION                                 */
 /* =============================================== */
 
 .hero {
     padding: 4rem 0 3rem;
+    /* ใช้ .webp ตามที่อัปเดต */
     background-image:
         linear-gradient(180deg, rgba(126, 37, 34, 0.85), rgba(91, 24, 22, 0.9)),
         url("thai-bg.webp"); 
@@ -278,7 +271,6 @@ body {
     gap: 2rem;
 }
 
-/* โลโก้รูปภาพใน Hero (ฝั่งซ้าย) */
 .hero-logo {
     flex: 0 0 220px;
     display: flex;
@@ -295,7 +287,6 @@ body {
     box-shadow: none;
 }
 
-/* กล่องข้อความด้านขวาของ Hero */
 .hero-text {
     flex: 1;
     min-width: 260px;
@@ -316,7 +307,6 @@ body {
     color: var(--color-text-sub);
 }
 
-/* ปุ่ม WhatsApp สำหรับจองคิว */
 .primary-btn {
     display: inline-block;
     padding: 0.7rem 1.6rem;
@@ -337,16 +327,11 @@ body {
 }
 
 /* =============================================== */
-/* 5. GENERIC SECTION LAYOUT – โครงของ section ทั่วไป */
+/* 5. GENERIC SECTION LAYOUT                       */
 /* =============================================== */
 
-.section {
-    padding: 3rem 0;
-}
-
-.section-alt {
-    background: var(--bg-alt);
-}
+.section { padding: 3rem 0; }
+.section-alt { background: var(--bg-alt); }
 
 .section-title {
     text-align: center;
@@ -358,7 +343,7 @@ body {
 }
 
 /* =============================================== */
-/* 6. SERVICES CARDS – การ์ดบริการใน HERO           */
+/* 6. SERVICES CARDS                               */
 /* =============================================== */
 
 .services-in-hero {
@@ -367,21 +352,16 @@ body {
     padding-bottom: 3rem;
 }
 
-/* กริดการ์ดบริการ */
 .cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 1.5rem;
 }
 
-/* จอใหญ่ให้เป็น 4 คอลัมน์ */
 @media (min-width: 1100px) {
-    .cards {
-        grid-template-columns: repeat(4, 1fr);
-    }
+    .cards { grid-template-columns: repeat(4, 1fr); }
 }
 
-/* กล่องการ์ดแต่ละใบ */
 .card {
     background: var(--overlay-card);
     border-radius: 16px;
@@ -391,11 +371,11 @@ body {
 }
 
 .card-title {
-    font-family: var(--font-heading);
     font-size: 1.05rem;
     margin-top: 0;
     margin-bottom: 0.4rem;
     color: #fce3a4;
+    font-family: var(--font-heading);
 }
 
 .card-text {
@@ -404,15 +384,12 @@ body {
     margin-top: 0;
 }
 
-/* การ์ดในจอเล็ก: ลด padding นิดหน่อย */
 @media (max-width: 600px) {
-    .card {
-        padding: 1.2rem 1rem;
-    }
+    .card { padding: 1.2rem 1rem; }
 }
 
 /* =============================================== */
-/* 7. INTRO / WELCOME SECTION – ยินดีต้อนรับ        */
+/* 7. INTRO SECTION                                */
 /* =============================================== */
 
 .intro-section {
@@ -422,27 +399,22 @@ body {
     overflow: hidden;
 }
 
-/* กล่องรวมรูป + ข้อความ intro */
 .intro-container {
     max-width: 1100px;
     margin: 0 auto;
     padding: 0 1.5rem;
-
     display: flex;
     gap: 2rem;
     align-items: center;
-
     position: relative;
     z-index: 1;
 }
 
-/* กล่องรูป intro-massage + intro-decor */
 .intro-image {
-    position: relative;   /* ให้ intro-decor วางอิงได้ */
+    position: relative;
     z-index: 1;  
 }
 
-/* รูปหลัก intro-massage.webp */
 .intro-main {
     width: 120%;
     max-width: 480px;
@@ -452,20 +424,16 @@ body {
     z-index: 2;
 }
 
-/* รูปตกแต่ง intro-decor.webp */
 .intro-decor {
     position: absolute;
-    /* ตำแหน่งปรับได้ */
     bottom: -20px;
     left: 200px;
-    /* ขนาดปรับได้ */
     width: 840px;
     opacity: 0.048;
     pointer-events: none;
     z-index: -1;
 }
 
-/* หัวข้อ WELCOME 3 ภาษา */
 .intro-text h2 {
     font-family: var(--font-heading);
     color: var(--color-gold);
@@ -473,14 +441,12 @@ body {
     margin-bottom: 1rem;
 }
 
-/* สไตล์ข้อความยาว (ใช้ร่วมหลาย section) */
 .welcome-text {
     text-align: justify;
     text-align-last: left;
     line-height: 1.8;
 }
 
-/* ข้อความยินดีต้อนรับเฉพาะ intro */
 .intro-text p {
     font-size: 1.5rem;
     color: #f8f4e8;
@@ -488,7 +454,6 @@ body {
     max-width: 500px;
 }
 
-/* แท็กไลน์ต้อนรับใต้หัวข้อหลัก */
 .intro-tagline {
     font-size: 1.05rem;
     color: #fbe1a2;
@@ -497,52 +462,28 @@ body {
     text-align: justify;
 }
 
-/* มือถือ – ให้แคบลงหน่อย */
 @media (max-width: 780px) {
-    .intro-tagline {
-        font-size: 0.98rem;
-    }
-}
-
-/* Intro บนมือถือ: รูปอยู่บน ข้อความอยู่ล่าง */
-@media (max-width: 780px) {
-    .intro-container {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .intro-text p {
-        margin-left: auto;
-        margin-right: auto;
-    }
+    .intro-tagline { font-size: 0.98rem; }
+    .intro-container { flex-direction: column; text-align: center; }
+    .intro-text p { margin-left: auto; margin-right: auto; }
 }
 
 /* =============================================== */
-/* 8. STORY SECTIONS – ส่วนเล่าเรื่องแต่ละการนวด    */
+/* 8. STORY SECTIONS                               */
 /* =============================================== */
 
-/* ----------------------------------------------- */
-/* 8.0 BASE STORY LAYOUT – โครง 2 คอลัมน์ใช้ร่วมกัน */
-/* ----------------------------------------------- */
-
-/* กล่องรวม story-text + story-image */
 .story-inner {
     max-width: 1100px;
     margin: 0 auto;
     padding: 0 1.5rem;
-
     display: flex;
     align-items: center;
     gap: 3rem;
     flex-wrap: wrap;
 }
 
-/* ถ้าเพิ่ม .reverse ที่ story-inner จะสลับซ้าย/ขวา */
-.story-inner.reverse {
-    flex-direction: row-reverse;
-}
+.story-inner.reverse { flex-direction: row-reverse; }
 
-/* ฝั่งตัวหนังสือในทุก story */
 .story-text {
     flex: 1.3;
     min-width: 260px;
@@ -551,7 +492,6 @@ body {
     z-index: 3;
 }
 
-/* หัวข้อเรื่องในแต่ละการนวด */
 .story-title {
     font-family: var(--font-heading);
     font-size: 2rem;
@@ -559,26 +499,23 @@ body {
     margin-bottom: 1.2rem;
 }
 
-/* เนื้อความยาวใน story (ทุกภาษา) */
 .story-text p {
     color: #f7e7dc;
     font-size: 1.5rem;
     line-height: 1.7;
 }
 
-/* ฝั่งรูปในทุก story */
 .story-image {
     flex: 1;
     min-width: 300px;
     text-align: center;
-
     position: relative;
     z-index: 1;
     display: flex;
     justify-content: center;
 }
 
-/* รูปหลักทุกใบใน story (ยกเว้นรูปตกแต่ง) */
+/* Main images style */
 .story-image img:not(.section-decor):not(.section-decor-aroma):not(.section-decor-Hot):not(.section-decor-Foot):not(.section-decor-sb) {
     width: 100%;
     max-width: 480px;
@@ -587,639 +524,227 @@ body {
     display: block;
 }
 
-/* class เสริมสำหรับ story ทั่วไป */
-.story-section {
-    background: var(--bg-section-1);
-    padding: 4rem 0;
-}
+.story-section { background: var(--bg-section-1); padding: 4rem 0; }
 
-/* =============================================== */
-/* 8.1 THAI MASSAGE STORY (การนวดแผนไทย)          */
-/* =============================================== */
-
-.thai-massage-story {
-    background: var(--bg-section-1);
-    padding: 4rem 0;
-}
-
-/* รูปหลักโค้งมนพิเศษ */
+/* 8.1 Thai */
+.thai-massage-story { background: var(--bg-section-1); padding: 4rem 0; }
 .intro-2 {
-    width: 120%;
-    max-width: 480px;
-    border-radius: 80px;
-    object-fit: cover;
-    box-shadow: var(--shadow-default);
-    position: relative;
-    z-index: 2;
+    width: 120%; max-width: 480px; border-radius: 80px; object-fit: cover;
+    box-shadow: var(--shadow-default); position: relative; z-index: 2;
 }
-
-/* รูปตกแต่ง “ช้าง” ด้านหลัง */
 .section-decor {
-    position: absolute;
-    bottom: 10px;
-    inset-inline: 0;        /* = left: 0; right: 0; */
-    margin-inline: auto;    /* = center แบบ block */
-    width: 320px !important;      /* ปรับขนาดช้างตรงนี้ */
-    max-width: none !important; 
-    opacity: 0.048;
-    z-index: -1;
-    pointer-events: none;
+    position: absolute; bottom: 10px; inset-inline: 0; margin-inline: auto;
+    width: 320px !important; max-width: none !important; opacity: 0.048; z-index: -1; pointer-events: none;
 }
+.thai-massage-story .story-image img, .thai-massage-story .intro-2 { box-shadow: none; }
 
-/* ตัดเงารูปในการนวดไทยให้เนียนกับพื้นหลัง */
-.thai-massage-story .story-image img,
-.thai-massage-story .intro-2 {
-    box-shadow: none;
-}
-
-/* =============================================== */
-/* 8.2 AROMA OIL MASSAGE STORY (นวดน้ำมันอโรม่า) */
-/* =============================================== */
-
-.aroma-story {
-    background: var(--bg-section-2);
-    padding: 4rem 0;
-}
-
+/* 8.2 Aroma */
+.aroma-story { background: var(--bg-section-2); padding: 4rem 0; }
 .intro-3 {
-    width: 120%;
-    max-width: 480px;
-    border-radius: 80px;
-    object-fit: cover;
-    box-shadow: var(--shadow-default);
-    position: relative;
-    z-index: 2;
+    width: 120%; max-width: 480px; border-radius: 80px; object-fit: cover;
+    box-shadow: var(--shadow-default); position: relative; z-index: 2;
 }
-
 .section-decor-aroma {
-    position: absolute;
-    bottom: -10px;
-    inset-inline: 0;
-    margin-inline: auto;
-    width: 400px !important;
-    max-width: none !important;
-    opacity: 0.048;
-    pointer-events: none;
-    z-index: -1;
+    position: absolute; bottom: -10px; inset-inline: 0; margin-inline: auto;
+    width: 400px !important; max-width: none !important; opacity: 0.048; pointer-events: none; z-index: -1;
 }
 
-/* =============================================== */
-/* 8.3 HOT STONE MASSAGE STORY (นวดหินร้อน)        */
-/* =============================================== */
-
-.hotstone-story {
-    background: var(--bg-section-1);
-    padding: 4rem 0;
-}
-
+/* 8.3 Hot Stone */
+.hotstone-story { background: var(--bg-section-1); padding: 4rem 0; }
 .intro-4 {
-    width: 120%;
-    max-width: 480px;
-    border-radius: 80px;
-    object-fit: cover;
-    box-shadow: var(--shadow-default);
-    position: relative;
-    z-index: 2;
+    width: 120%; max-width: 480px; border-radius: 80px; object-fit: cover;
+    box-shadow: var(--shadow-default); position: relative; z-index: 2;
 }
-
 .section-decor-Hot {
-    position: absolute;
-    bottom: -10px;
-    inset-inline: 0;
-    margin-inline: auto;
-    width: 400px !important;
-    max-width: none !important;
-    opacity: 0.048;
-    pointer-events: none;
-    z-index: -1;
+    position: absolute; bottom: -10px; inset-inline: 0; margin-inline: auto;
+    width: 400px !important; max-width: none !important; opacity: 0.048; pointer-events: none; z-index: -1;
 }
 
-/* =============================================== */
-/* 8.4 FOOT MASSAGE STORY (นวดเท้า)                */
-/* =============================================== */
-
-.foot-story {
-    background: var(--bg-section-2);
-    padding: 4rem 0;
-}
-
+/* 8.4 Foot */
+.foot-story { background: var(--bg-section-2); padding: 4rem 0; }
 .intro-5 {
-    width: 120%;
-    max-width: 480px;
-    border-radius: 80px;
-    object-fit: cover;
-    box-shadow: var(--shadow-default);
-    position: relative;
-    z-index: 2;
+    width: 120%; max-width: 480px; border-radius: 80px; object-fit: cover;
+    box-shadow: var(--shadow-default); position: relative; z-index: 2;
 }
-
 .section-decor-Foot {
-    position: absolute;
-    bottom: -50px;
-    inset-inline: 0;
-    margin-inline: auto;
-    width: 400px !important;
-    max-width: none !important;
-    opacity: 0.048;
-    pointer-events: none;
-    z-index: -1;
+    position: absolute; bottom: -50px; inset-inline: 0; margin-inline: auto;
+    width: 400px !important; max-width: none !important; opacity: 0.048; pointer-events: none; z-index: -1;
 }
 
-/* =============================================== */
-/* 8.5 BACK SCRUB + MASSAGE STORY (ขัดผิว + นวด)  */
-/* =============================================== */
-
-/* รูปหลัก */
+/* 8.5 Scrub */
 .intro-6 {
-    width: 120%;
-    max-width: 480px;
-    border-radius: 80px;
-    object-fit: cover;
-    box-shadow: var(--shadow-default);
-    position: relative;
-    z-index: 2;
+    width: 120%; max-width: 480px; border-radius: 80px; object-fit: cover;
+    box-shadow: var(--shadow-default); position: relative; z-index: 2;
 }
-
-/* รูปตกแต่ง */
 .section-decor-sb {
-    position: absolute;
-    bottom: -20px;
-    inset-inline: 0;
-    margin-inline: auto;
-    width: 400px !important;
-    max-width: none !important;
-    opacity: 0.048;
-    pointer-events: none;
-    z-index: -1;
+    position: absolute; bottom: -20px; inset-inline: 0; margin-inline: auto;
+    width: 400px !important; max-width: none !important; opacity: 0.048; pointer-events: none; z-index: -1;
 }
 
-/* =============================================== */
-/* 8.6 CAUTION STORY (ใครควรระวังการนวด)          */
-/* =============================================== */
-
-.story-section--caution {
-    background: var(--bg-section-1);
-    padding: 4rem 0;
-}
-
-/* คอลัมน์รูปใน caution: ทำให้แคบลงและไม่มีเงา */
+/* 8.6 Caution */
+.story-section--caution { background: var(--bg-section-1); padding: 4rem 0; }
 .story-section--caution .story-image {
-    background: none !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-    padding: 0 !important;
-
-    flex: 0 0 280px;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    background: none !important; border-radius: 0 !important; box-shadow: none !important;
+    padding: 0 !important; flex: 0 0 280px; display: flex; justify-content: center; align-items: flex-start;
 }
-
-/* รูปใน caution – ขยายและยกขึ้นด้านบน */
 .story-section--caution .story-image img {
-    width: 180%;
-    height: auto;
-    display: block;
-    object-fit: contain;
-    margin: 0 auto;
-    border: none !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-    transform: translateY(-90px);
+    width: 180%; height: auto; display: block; object-fit: contain; margin: 0 auto;
+    border: none !important; border-radius: 0 !important; box-shadow: none !important; transform: translateY(-90px);
 }
-
 @media (max-width: 900px) {
-    .story-section--caution .story-image img {
-        width: 100%;
-        transform: translateY(-20px);
-    }
+    .story-section--caution .story-image img { width: 100%; transform: translateY(-20px); }
 }
-
-.story-section--caution .story-inner {
-    align-items: flex-start;
-}
-
+.story-section--caution .story-inner { align-items: flex-start; }
 .intro-7 {
-    width: 120%;
-    max-width: 480px;
-    border-radius: 80px;
-    object-fit: cover;
-    box-shadow: var(--shadow-default);
-    position: relative;
-    z-index: 2;
+    width: 120%; max-width: 480px; border-radius: 80px; object-fit: cover;
+    box-shadow: var(--shadow-default); position: relative; z-index: 2;
 }
-
 .section-decor-cl {
-    position: absolute;
-    bottom: -710px;
-    inset-inline: 0;
-    margin-inline: auto;
-    width: 450px !important;
-    max-width: none !important;
-    opacity: 1;
-    pointer-events: none;
-    z-index: -1;
+    position: absolute; bottom: -710px; inset-inline: 0; margin-inline: auto;
+    width: 450px !important; max-width: none !important; opacity: 1; pointer-events: none; z-index: -1;
 }
 
-/* =============================================== */
-/* 8.7 AFTERCARE STORY (นวดแล้วควรทำอย่างไร)       */
-/* =============================================== */
-
-.aftercare-story {
-    background: var(--bg-section-1); /* โทนเดียวกับ caution */
-    padding: 1rem 0;
-}
-
-.aftercare-story .story-inner {
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-}
-
+/* 8.7 Aftercare */
+.aftercare-story { background: var(--bg-section-1); padding: 1rem 0; }
+.aftercare-story .story-inner { display: flex; align-items: flex-start; gap: 1rem; }
 .aftercare-story .story-image {
-    background: none !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-    padding: 0 !important;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background: none !important; border-radius: 0 !important; box-shadow: none !important;
+    padding: 0 !important; display: flex; justify-content: center; align-items: center;
 }
-
 .aftercare-image {
-    width: 130%;
-    max-width: 480px;
-    border-radius: 0 !important;  /* ไม่มีโค้ง */
-    box-shadow: none !important;  /* ไม่มีเงา */
-    background: none !important;
-    transform: translateX(50px);
-    object-fit: contain;
+    width: 130%; max-width: 480px; border-radius: 0 !important; box-shadow: none !important;
+    background: none !important; transform: translateX(50px); object-fit: contain;
 }
+.aftercare-story .story-text { margin-left: 25px; }
 
-.aftercare-story .story-text {
-    margin-left: 25px;
-}
-
-/* =============================================== */
-/* 8.8 NAILS STORY (ทำเล็บมือ / ทำเล็บเท้า)        */
-/* =============================================== */
-
-.story-section--nails {
-    background: var(--bg-section-2);
-    padding: 4rem 0;
-}
-
+/* 8.8 Nails */
+.story-section--nails { background: var(--bg-section-2); padding: 4rem 0; }
 .story-section--nails .story-image img {
-    width: 100%;
-    max-width: 520px;
-    height: auto;
-    border-radius: 20px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.45);
-    object-fit: cover;
-    transform: translateX(10px);
+    width: 100%; max-width: 520px; height: auto; border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.45); object-fit: cover; transform: translateX(10px);
 }
 
 /* =============================================== */
-/* 9. PRICE TABLES – ตารางราคา                      */
+/* 9. PRICE TABLES                                 */
 /* =============================================== */
 
-#prices {
-    background-color: var(--bg-alt);
-    padding: 3rem 0;
-}
-
+#prices { background-color: var(--bg-alt); padding: 3rem 0; }
 #prices .section-title {
-    font-size: 2.2rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    color: var(--color-gold);
-    text-shadow: 0 3px 8px rgba(0,0,0,0.45);
-    margin-bottom: 2.5rem;
-    margin-top: 0.8rem;
+    font-size: 2.2rem; font-weight: 700; letter-spacing: 0.05em; color: var(--color-gold);
+    text-shadow: 0 3px 8px rgba(0,0,0,0.45); margin-bottom: 2.5rem; margin-top: 0.8rem;
 }
-
 .price-table {
-    width: 100%;
-    max-width: 900px;
-    margin: 0 auto;
-    border-collapse: collapse;
-    font-size: 1.1rem;
-    background: rgba(24, 8, 6, 0.9);
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: var(--shadow-default);
-    table-layout: fixed;
+    width: 100%; max-width: 900px; margin: 0 auto; border-collapse: collapse; font-size: 1.1rem;
+    background: rgba(24, 8, 6, 0.9); border-radius: 16px; overflow: hidden;
+    box-shadow: var(--shadow-default); table-layout: fixed;
 }
+.price-table thead { background: rgba(249, 211, 122, 0.1); color: var(--color-gold); font-size: 1.1rem; }
+.price-table th, .price-table td { padding: 0.75rem 1rem; text-align: left; }
+.price-table tbody tr:nth-child(even) { background: rgba(255, 255, 255, 0.02); }
 
-.price-table thead {
-    background: rgba(249, 211, 122, 0.1);
-    color: var(--color-gold);
-    font-size: 1.1rem;
-}
-
-.price-table th,
-.price-table td {
-    padding: 0.75rem 1rem;
-    text-align: left;
-}
-
-.price-table tbody tr:nth-child(even) {
-    background: rgba(255, 255, 255, 0.02);
-}
-
-/* คอลัมน์ตารางนวด */
 .price-table-massage col.col-service { width: 46%; }
-.price-table-massage col.col-30,
-.price-table-massage col.col-60,
-.price-table-massage col.col-90 { width: 18%; }
+.price-table-massage col.col-30, .price-table-massage col.col-60, .price-table-massage col.col-90 { width: 18%; }
+.price-table-massage th:nth-child(2), .price-table-massage th:nth-child(3), .price-table-massage th:nth-child(4),
+.price-table-massage td:nth-child(2), .price-table-massage td:nth-child(3), .price-table-massage td:nth-child(4) { text-align: center; }
 
-.price-table-massage th:nth-child(2),
-.price-table-massage th:nth-child(3),
-.price-table-massage th:nth-child(4),
-.price-table-massage td:nth-child(2),
-.price-table-massage td:nth-child(3),
-.price-table-massage td:nth-child(4) {
-    text-align: center;
-}
-
-/* คอลัมน์ตารางทำเล็บ */
 .price-table-nails col.col-service { width: 45%; }
 .price-table-nails col.col-price { width: 55%; }
-.price-table-nails th:nth-child(2),
-.price-table-nails td:nth-child(2) {
-    text-align: center;
-}
+.price-table-nails th:nth-child(2), .price-table-nails td:nth-child(2) { text-align: center; }
 
-/* ตารางบนจอเล็ก – ให้เลื่อนในแนวนอนได้ */
 @media (max-width: 600px) {
-    .price-table {
-        display: block;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-    }
+    .price-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
 }
 
 /* =============================================== */
-/* 10. GALLERY – รูปร้านคุณก้อย                      */
+/* 10. GALLERY                                     */
 /* =============================================== */
 
-.section-gallery {
-    background: var(--bg-section-1);
-    padding: 4rem 0;
-}
-
+.section-gallery { background: var(--bg-section-1); padding: 4rem 0; }
 .section-gallery .section-title.lang-th {
-    font-family: var(--font-heading);
-    font-size: 2.2rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    margin-top: 0.5rem;
-    color: var(--color-gold);
-    letter-spacing: 1px;
+    font-family: var(--font-heading); font-size: 2.2rem; font-weight: 700;
+    margin-bottom: 1rem; margin-top: 0.5rem; color: var(--color-gold); letter-spacing: 1px;
 }
-
-.section-gallery .section-title.lang-de,
-.section-gallery .section-title.lang-en {
-    font-family: var(--font-heading);
-    font-size: 2.2rem;
-    font-weight: 600;
+.section-gallery .section-title.lang-de, .section-gallery .section-title.lang-en {
+    font-family: var(--font-heading); font-size: 2.2rem; font-weight: 600;
 }
-
 .gallery-grid {
-    margin-top: 2.5rem;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.5rem;
-    margin-left: auto;
-    margin-right: auto;
-    transform: translateX(-50px); /* ขยับกริดไปทางซ้ายเล็กน้อย */
+    margin-top: 2.5rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem;
+    margin-left: auto; margin-right: auto; transform: translateX(-50px);
 }
-
-.gallery-item {
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    overflow: hidden;
-    border-radius: 10px;
-    box-shadow: var(--shadow-default);
-}
-
+.gallery-item { width: 100%; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 10px; box-shadow: var(--shadow-default); }
 .gallery-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    border-radius: inherit;
+    width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit;
     transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
+.gallery-item img:hover { transform: translateY(0px) scale(1.01); box-shadow: 0 16px 30px rgba(0,0,0,0.45); }
 
-.gallery-item img:hover {
-    transform: translateY(0px) scale(1.01);
-    box-shadow: 0 16px 30px rgba(0,0,0,0.45);
-}
-
-@media (max-width: 900px) {
-    .gallery-grid { transform: none; }
-}
-
-@media (max-width: 768px) {
-    .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-
-@media (max-width: 540px) {
-    .gallery-grid { grid-template-columns: 1fr; }
-}
+@media (max-width: 900px) { .gallery-grid { transform: none; } }
+@media (max-width: 768px) { .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 540px) { .gallery-grid { grid-template-columns: 1fr; } }
 
 /* =============================================== */
-/* 11. CONTACT & FOOTER & MAP & FAQ & LEGAL        */
+/* 11. OTHER SECTIONS (Contact, Map, FAQ, Legal)   */
 /* =============================================== */
 
-.contact-section {
-    background: var(--bg-contact);
-    padding: 3rem 0 4rem;
-}
-
-.contact-header {
-    grid-column: 1 / -1;
-    text-align: center;
-    margin-bottom: -2.5rem;
-}
-
+.contact-section { background: var(--bg-contact); padding: 3rem 0 4rem; }
+.contact-header { grid-column: 1 / -1; text-align: center; margin-bottom: -2.5rem; }
 .contact-header-title {
-    font-family: var(--font-heading);
-    font-size: 2.3rem;
-    font-weight: bold;
-    color: #f7d186;
-    margin: 0 0 1rem;
+    font-family: var(--font-heading); font-size: 2.3rem; font-weight: bold; color: #f7d186; margin: 0 0 1rem;
 }
-
-.contact-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 3rem;
-}
-
-.contact-column {
-    color: #ffe8d1;
-    font-size: 1.1rem;
-    line-height: 1.7;
-}
-
-.contact-title {
-    font-family: var(--font-heading);
-    font-size: 1.6rem;
-    color: var(--color-gold);
-    margin-bottom: 0.8rem;
-}
-
-.contact-section a {
-    color: #f6d47a;
-    text-decoration: none;
-    border-bottom: 1px solid rgba(246, 212, 122, 0.4);
-}
-
-.contact-section a:hover {
-    border-bottom-color: rgba(246, 212, 122, 1);
-}
+.contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 3rem; }
+.contact-column { color: #ffe8d1; font-size: 1.1rem; line-height: 1.7; }
+.contact-title { font-family: var(--font-heading); font-size: 1.6rem; color: var(--color-gold); margin-bottom: 0.8rem; }
+.contact-section a { color: #f6d47a; text-decoration: none; border-bottom: 1px solid rgba(246, 212, 122, 0.4); }
+.contact-section a:hover { border-bottom-color: rgba(246, 212, 122, 1); }
 
 .footer {
-    padding: 1rem 0 1.5rem;
-    text-align: center;
-    font-size: 1rem;
-    color: #f6dec4;
-    border-top: 1px solid rgba(249, 211, 122, 0.25);
+    padding: 1rem 0 1.5rem; text-align: center; font-size: 1rem; color: #f6dec4; border-top: 1px solid rgba(249, 211, 122, 0.25);
 }
 
-/* Map Section */
-.map-section {
-    background: var(--bg-section-1);
-    padding: 3rem 0 0 0;
-    padding-top: 0;
-}
-
+.map-section { background: var(--bg-section-1); padding: 3rem 0 0 0; padding-top: 0; }
 .map-container { margin-top: -30px; }
 .map-container iframe { width: 100%; height: 450px; border: 0; display: block; }
 .map-container a { display: block; }
 
-/* FAQ Section */
-.section-faq {
-    background: var(--bg-section-1);
-    padding: 4rem 0;
-}
-
-.section-faq .section-title {
-    margin-bottom: 2rem;
-    font-size: 2.2rem;
-}
-
-.faq-list {
-    max-width: 900px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
+.section-faq { background: var(--bg-section-1); padding: 4rem 0; }
+.section-faq .section-title { margin-bottom: 2rem; font-size: 2.2rem; }
+.faq-list { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 1rem; }
 .faq-item {
-    background: rgba(24, 8, 6, 0.9);
-    border-radius: 14px;
-    border: 1px solid rgba(249, 211, 122, 0.4);
-    padding: 0.6rem 1rem;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+    background: rgba(24, 8, 6, 0.9); border-radius: 14px; border: 1px solid rgba(249, 211, 122, 0.4);
+    padding: 0.6rem 1rem; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
 }
-
 .faq-question {
-    list-style: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-family: var(--font-heading);
-    font-size: 1.3rem;
-    color: var(--color-gold);
-    padding: 0.4rem 0;
+    list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between;
+    font-family: var(--font-heading); font-size: 1.3rem; color: var(--color-gold); padding: 0.4rem 0;
 }
-
 .faq-question::-webkit-details-marker { display: none; }
-
-.faq-question::after {
-    content: "▾";
-    margin-left: 0.75rem;
-    font-size: 1.5rem;
-    transition: transform 0.2s ease;
-}
-
+.faq-question::after { content: "▾"; margin-left: 0.75rem; font-size: 1.5rem; transition: transform 0.2s ease; }
 .faq-item[open] .faq-question::after { transform: rotate(180deg); }
+.faq-answer { padding: 0.3rem 0 0.6rem; border-top: 1px solid rgba(249, 211, 122, 0.25); margin-top: 0.4rem; }
+.faq-answer p { font-size: 1rem; line-height: 1.7; color: #f7e7dc; margin: 0.4rem 0; }
 
-.faq-answer {
-    padding: 0.3rem 0 0.6rem;
-    border-top: 1px solid rgba(249, 211, 122, 0.25);
-    margin-top: 0.4rem;
-}
+.legal-links { background: var(--bg-legal); padding: 1.2rem 0; }
+.legal-links-inner { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; font-size: 1.2rem; }
+.legal-links a { color: #ffffff; text-decoration: underline; text-underline-offset: 0.15em; }
+.legal-links a:hover { text-decoration-thickness: 2px; }
 
-.faq-answer p {
-    font-size: 1rem;
-    line-height: 1.7;
-    color: #f7e7dc;
-    margin: 0.4rem 0;
-}
-
-/* Legal Links */
-.legal-links {
-    background: var(--bg-legal);
-    padding: 1.2rem 0;
-}
-
-.legal-links-inner {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1.5rem;
-    font-size: 1.2rem;
-}
-
-.legal-links a {
-    color: #ffffff;
-    text-decoration: underline;
-    text-underline-offset: 0.15em;
-}
-
-.legal-links a:hover {
-    text-decoration-thickness: 2px;
-}
-
-/* Legal Page & Note */
 .legal-page { background: var(--bg-section-1); padding: 4rem 0; }
 .legal-title { text-align: center; font-family: var(--font-heading); font-size: 2.2rem; color: var(--color-gold); margin: 0 0 2rem; }
 .legal-content { max-width: 800px; margin: 0 auto 2.5rem auto; font-size: 1.2rem; line-height: 1.8; color: var(--color-text-main); }
 .legal-note { text-align: center; margin-top: 2rem; color: var(--color-gold); font-size: 1.1rem; }
 
 /* =============================================== */
-/* 12. GLOBAL RESPONSIVE RULES (Mobile)            */
+/* 12. RESPONSIVE                                  */
 /* =============================================== */
 
 @media (max-width: 900px) {
-    .story-inner {
-        flex-direction: column-reverse;
-        text-align: center;
-    }
-
-    .reverse-layout {
-        flex-direction: column;
-    }
-
-    .hotstone-story .story-inner,
-    .foot-story .story-inner,
-    .story-section .story-inner {
-        flex-direction: column;
-    }
-
-    .story-text {
-        text-align: justify;
-    }
+    .story-inner { flex-direction: column-reverse; text-align: center; }
+    .reverse-layout { flex-direction: column; }
+    .hotstone-story .story-inner, .foot-story .story-inner, .story-section .story-inner { flex-direction: column; }
+    .story-text { text-align: justify; }
 }
 
 @media (max-width: 720px) {
-    /* HERO layout บนมือถือ */
     .hero { padding-top: 3rem; }
     .hero-inner { flex-direction: column; text-align: center; }
     .hero-text { margin-top: 1rem; }
@@ -1229,10 +754,6 @@ body {
     .container { padding: 0 1.2rem; }
 }
 
-/* =============================================== */
-/* 13. EXTRA MOBILE TUNING                         */
-/* =============================================== */
-
 @media (max-width: 768px) {
     body { font-size: 0.95rem; }
     .container { padding: 0 1rem; }
@@ -1240,12 +761,8 @@ body {
     .hero-sub { font-size: 0.95rem; }
     .story-title { font-size: 1.6rem; }
     .story-text p, .welcome-text, .intro-text p, .intro-tagline { font-size: 1rem; line-height: 1.7; }
-
-    /* กันรูปหลักไม่ให้กว้างเกินหน้าจอ */
     .intro-main, .intro-2, .intro-3, .intro-4, .intro-5, .intro-6, .intro-7, .story-image img, .aftercare-image {
-        width: 100%;
-        max-width: 420px;
-        transform: none;
+        width: 100%; max-width: 420px; transform: none;
     }
     .hero-logo { margin-top: 0; }
     .story-image img { border-radius: 16px; box-shadow: 0 8px 18px rgba(0,0,0,0.35); }
@@ -1255,28 +772,18 @@ body {
     .faq-item { padding: 0.5rem 0.8rem; }
     .faq-question { font-size: 1rem; }
     .faq-answer p { font-size: 0.95rem; }
-    
-    /* ซ่อนรูปตกแต่งที่ใหญ่มากบนจอเล็ก */
-    .intro-decor, .section-decor, .section-decor-aroma, .section-decor-Hot, .section-decor-Foot, .section-decor-sb {
-        display: none;
-    }
+    .intro-decor, .section-decor, .section-decor-aroma, .section-decor-Hot, .section-decor-Foot, .section-decor-sb { display: none; }
 }
 
 @media (max-width: 480px) {
     .hero { padding: 2.5rem 0 2rem; }
     .hero-title { font-size: 1.6rem; }
     .primary-btn { display: block; width: 100%; text-align: center; margin: 0 0 0.5rem 0; }
-    
     .section, .story-section, .thai-massage-story, .aroma-story, .hotstone-story, .foot-story, 
     .story-section--nails, .section-gallery, .section-faq { padding: 2.5rem 0; }
-    
     .contact-section { padding: 2.5rem 0 3rem; }
     .price-table th, .price-table td { padding: 0.6rem 0.7rem; font-size: 0.95rem; }
 }
-
-/* =============================================== */
-/* 14. MOBILE LANDSCAPE TUNING – มือถือแนวนอน     */
-/* =============================================== */
 
 @media (max-width: 900px) and (orientation: landscape) {
     body { font-size: 0.85rem; }
@@ -1287,23 +794,16 @@ body {
     .hero-logo { flex: 0 0 160px; margin-top: 0; }
     .hero-logo-img { max-height: 150px; max-width: 180px; }
     .primary-btn { padding: 0.55rem 1.2rem; font-size: 0.85rem; box-shadow: 0 4px 10px rgba(0,0,0,0.35); }
-    
     .section-title, .story-title, .contact-header-title { font-size: 1.4rem; margin-bottom: 1.2rem; }
     .legal-title { font-size: 1.6rem; }
     .story-text p, .welcome-text, .intro-text p, .intro-tagline { font-size: 0.9rem; line-height: 1.6; }
-    
     .intro-container { gap: 1.5rem; }
     .intro-main { width: 100%; max-width: 360px; border-radius: 40px; }
-    
-    .intro-decor, .section-decor, .section-decor-aroma, .section-decor-Hot, .section-decor-Foot, .section-decor-sb {
-        opacity: 0.03; transform: scale(0.85);
-    }
-    
+    .intro-decor, .section-decor, .section-decor-aroma, .section-decor-Hot, .section-decor-Foot, .section-decor-sb { opacity: 0.03; transform: scale(0.85); }
     .story-image img:not(.section-decor):not(.intro-decor) { max-width: 360px; border-radius: 16px; box-shadow: 0 6px 16px rgba(0,0,0,0.35); }
     .story-section--caution .story-image img { width: 120%; transform: translateY(-30px); }
     .aftercare-image { width: 110%; max-width: 360px; transform: translateX(20px); }
     .story-section--nails .story-image img { max-width: 380px; transform: translateX(0); }
-    
     .price-table th, .price-table td { padding: 0.5rem 0.7rem; font-size: 0.9rem; }
     .gallery-grid { gap: 0.35rem; margin-top: 1.5rem; transform: none; }
     .faq-question { font-size: 1rem; }
