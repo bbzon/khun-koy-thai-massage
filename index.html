@@ -107,6 +107,17 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="style.css">
+
+     <!-- เพิ่มตรงนี้เข้าไปครับ -->
+    <style>
+        /* ซ่อน TH และ EN ไว้ก่อน เพื่อไม่ให้เห็นแวบๆ ตอนโหลด */
+        .lang-th, .lang-en { display: none; }
+        /* บังคับโชว์ DE (เยอรมัน) เป็นค่าเริ่มต้น */
+        .lang-de { display: inline-block; } 
+        /* แก้บั๊กการแสดงผลบล็อก */
+        h1.lang-de, h2.lang-de, h3.lang-de, p.lang-de, div.lang-de { display: block; }
+    </style>
+    
 </head>
 
 <body>
@@ -1589,6 +1600,7 @@
 
 </body>
 </html>
+
 
 
 
