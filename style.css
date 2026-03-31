@@ -254,7 +254,7 @@ body {
 /* =============================================== */
 
 .hero {
-    padding: 4rem 0 3rem;
+    padding: 3.5rem 0 3rem;
     /* ใช้ .webp ตามที่อัปเดต */
     background-image:
         linear-gradient(180deg, rgba(126, 37, 34, 0.85), rgba(91, 24, 22, 0.9)),
@@ -326,6 +326,59 @@ body {
     transform: translateY(-1px);
 }
 
+
+/* สไตล์สำหรับกล่องประกาศ */
+.announcement-container {
+    padding: 1rem 0 2rem;
+    text-align: center;
+}
+
+.announcement-box {
+    background: rgba(249, 211, 122, 0.15); /* สีทองจางๆ */
+    border: 2px dashed var(--color-gold);
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    animation: fadeIn 1s ease-in;
+}
+
+.announcement-title {
+    font-family: var(--font-heading);
+    color: var(--color-gold);
+    margin-bottom: 0.5rem;
+    font-size: 1.4rem;
+}
+
+.announcement-box p {
+    margin: 0;
+    font-size: 1.1rem;
+    color: var(--color-text-main);
+    line-height: 1.6;
+}
+
+.announcement-box strong {
+    color: var(--color-gold);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ปรับแต่งสำหรับมือถือ */
+@media (max-width: 480px) {
+    .announcement-box {
+        padding: 1rem;
+        margin: 0 0.5rem;
+    }
+    .announcement-title {
+        font-size: 1.2rem;
+    }
+}
+
+
+
+
 /* =============================================== */
 /* 5. GENERIC SECTION LAYOUT                       */
 /* =============================================== */
@@ -348,8 +401,8 @@ body {
 
 .services-in-hero {
     background: transparent;
-    padding-top: 3rem;
-    padding-bottom: 3rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
 }
 
 .cards {
